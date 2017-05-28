@@ -1,0 +1,750 @@
+Script started on Po 22. květen 2017, 08:18:47 CEST
+{
+  "name": "react-boilerplate",
+  "version": "3.4.0",
+  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+  },
+  "engines": {
+    "npm": ">=3",
+    "node": ">=5"
+  },
+  "author": "Max Stoiber",
+  "license": "MIT",
+  "scripts": {
+    "analyze:clean": "rimraf stats.json",
+    "preanalyze": "npm run analyze:clean",
+    "analyze": "node ./internals/scripts/analyze.js",
+    "extract-intl": "babel-node --presets latest,stage-0 -- ./internals/scripts/extract-intl.js",
+    "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
+    "preinstall": "npm run npmcheckversion",
+    "postinstall": "npm run build:dll",
+    "prebuild": "npm run build:clean",
+    "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
+    "build:clean": "npm run test:clean && rimraf ./build",
+    "build:dll": "node ./internals/scripts/dependencies.js",
+    "start": "cross-env NODE_ENV=development node server",
+    "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
+    "start:production": "npm run test && npm run build && npm run start:prod",
+    "start:prod": "cross-env NODE_ENV=production node server",
+    "presetup": "npm i chalk shelljs",
+    "setup": "node ./internals/scripts/setup.js",
+    "postsetup": "npm run build:dll",
+    "clean": "shjs ./internals/scripts/clean.js",
+    "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
+    "generate": "plop --plopfile internals/generators/index.js",
+    "lint": "npm run lint:js",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:js": "npm run lint:eslint -- . ",
+    "lint:staged": "lint-staged",
+    "pretest": "npm run test:clean && npm run lint",
+    "test:clean": "rimraf ./coverage",
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
+  },
+  "lint-staged": {
+    "*.js": "lint:eslint"
+  },
+  "pre-commit": "lint:staged",
+  "babel": {
+    "presets": [
+      [
+        "latest",
+        {
+          "es2015": {
+            "modules": false
+          }
+        }
+      ],
+      "react",
+      "stage-0"
+    ],
+    "env": {
+      "production": {
+        "only": [
+          "app"
+        ],
+        "plugins": [
+          "transform-react-remove-prop-types",
+          "transform-react-constant-elements",
+          "transform-react-inline-elements"
+        ]
+      },
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "dynamic-import-node"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true,
+      "es6": true
+    },
+    "plugins": [
+      "redux-saga",
+      "react",
+      "jsx-a11y"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "arrow-parens": [
+        "error",
+        "always"
+      ],
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ],
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ],
+      "import/imports-first": 0,
+      "import/newline-after-import": 0,
+      "import/no-dynamic-require": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-named-as-default": 0,
+      "import/no-unresolved": 2,
+      "import/prefer-default-export": 0,
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "jsx-a11y/aria-props": 2,
+      "jsx-a11y/heading-has-content": 0,
+      "jsx-a11y/href-no-hash": 2,
+      "jsx-a11y/label-has-for": 2,
+      "jsx-a11y/mouse-events-have-key-events": 2,
+      "jsx-a11y/role-has-required-aria-props": 2,
+      "jsx-a11y/role-supports-aria-prop[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h{[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "name": "react-boilerplate",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "version": "3.4.0",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "description": "A highly scalable, offline-first foundation with the be [Ksst DX and a focus on performance and best practices",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "repository": {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "type": "git",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "url": "git://github.com/react-boilerplate/react-boilerplate.git"[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   },[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "engines": {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "npm": ">=3",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "node": ">=5"[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   },[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "author": "Max Stoiber",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "license": "MIT",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "scripts": {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "analyze:clean": "rimraf stats.json",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "preanalyze": "npm run analyze:clean",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "analyze": "node ./internals/scripts/analyze.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "extract-intl": "babel-node --presets latest,stage-0 -- ./internals/s [Kccripts/extract-intl.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "preinstall": "npm run npmcheckversion",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "postinstall": "npm run build:dll",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "prebuild": "npm run build:clean",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "build": "cross-env NODE_ENV=production webpack --config internals/we [Kbbpack/webpack.prod.babel.js --color -p --progress",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "build:clean": "npm run test:clean && rimraf ./build",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "build:dll": "node ./internals/scripts/dependencies.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "start": "cross-env NODE_ENV=development node server",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true no [Kdde server",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "start:production": "npm run test && npm run build && npm run start:p [Krrod",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "start:prod": "cross-env NODE_ENV=production node server",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "presetup": "npm i chalk shelljs",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "setup": "node ./internals/scripts/setup.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "postsetup": "npm run build:dll",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "clean": "shjs ./internals/scripts/clean.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "clean:all": "npm run analyze:clean && npm run test:clean && npm run  [Kbbuild:clean",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "generate": "plop --plopfile internals/generators/index.js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "lint": "npm run lint:js",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern inte [Krrnals/scripts",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "lint:js": "npm run lint:eslint -- . ",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "lint:staged": "lint-staged",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "pretest": "npm run test:clean && npm run lint",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "test:clean": "rimraf ./coverage",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "test": "cross-env NODE_ENV=test jest --coverage",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "test:watch": "cross-env NODE_ENV=test jest --watchAll",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "coveralls": "cat ./coverage/lcov.info | coveralls"[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   },[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "lint-staged": {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "*.js": "lint:eslint"[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   },[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "pre-commit": "lint:staged",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h   "babel": {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h     "presets": [[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h       [[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h         "latest",[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h         {[?1l>[?2004l
+[0m[27m[24m[Jcursh cursh> [K[?1h=[?2004h           "es2015": {[?1l>[?2004l
+[0m[27m[24m[Jcursh cursh> [K[?1h=[?2004h             "modules": false[?1l>[?2004l
+[0m[27m[24m[Jcursh cursh> [K[?1h=[?2004h           }[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h         }[?1l>[?2004l
+]2;{ "name": "react-boilerplate",; "version": "3.4.0",; "description": ;  {;  ; }]1;{No command 'name:' found, did you mean:
+ Command 'namei' from package 'util-linux' (main)
+ Command 'named' from package 'bind9' (main)
+zsh: command not found: name:
+zsh: command not found: version:
+zsh: command not found: description:
+zsh: command not found: repository:
+No command 'type:' found, did you mean:
+ Command 'typer' from package 'erlang-typer' (universe)
+zsh: command not found: type:
+zsh: command not found: url:
+zsh: command not found: },
+zsh: command not found: engines:
+No command 'npm:' found, did you mean:
+ Command 'npm' from package 'npm' (universe)
+zsh: command not found: npm:
+No command 'node:' found, did you mean:
+ Command 'node' from package 'nodejs-legacy' (universe)
+zsh: command not found: node:
+zsh: command not found: },
+zsh: command not found: author:
+No command 'license:' found, did you mean:
+ Command 'license' from package 'liblicense-cli' (universe)
+zsh: command not found: license:
+zsh: command not found: scripts:
+zsh: command not found: analyze:clean:
+zsh: command not found: preanalyze:
+No command 'analyze:' found, did you mean:
+ Command 'analyzer' from package 'imms-common' (universe)
+zsh: command not found: analyze:
+zsh: command not found: extract-intl:
+zsh: command not found: npmcheckversion:
+zsh: command not found: preinstall:
+zsh: command not found: postinstall:
+zsh: command not found: prebuild:
+No command 'build:' found, did you mean:
+ Command 'buildd' from package 'buildd' (universe)
+zsh: command not found: build:
+zsh: command not found: build:clean:
+zsh: command not found: build:dll:
+No command 'start:' found, did you mean:
+ Command 'startx' from package 'xinit' (main)
+ Command 'start' from package 'upstart' (main)
+zsh: command not found: start:
+zsh: command not found: start:tunnel:
+zsh: command not found: start:production:
+zsh: command not found: start:prod:
+zsh: command not found: presetup:
+zsh: command not found: setup:
+zsh: command not found: postsetup:
+zsh: command not found: clean:
+zsh: command not found: clean:all:
+zsh: command not found: generate:
+zsh: command not found: lint:
+zsh: command not found: lint:eslint:
+zsh: command not found: lint:js:
+zsh: command not found: lint:staged:
+zsh: command not found: pretest:
+zsh: command not found: test:clean:
+No command 'test:' found, did you mean:
+ Command 'testr' from package 'python-testrepository' (universe)
+ Command 'testr' from package 'python3-testrepository' (main)
+ Command 'test' from package 'coreutils' (main)
+zsh: command not found: test:
+zsh: command not found: test:watch:
+No command 'coveralls:' found, did you mean:
+ Command 'coveralls' from package 'ruby-coveralls' (universe)
+zsh: command not found: coveralls:
+zsh: command not found: },
+zsh: command not found: lint-staged:
+zsh: command not found: *.js:
+zsh: command not found: },
+zsh: command not found: pre-commit:
+No command 'babel:' found, did you mean:
+ Command 'babel' from package 'babel-1.4.0' (universe)
+ Command 'babel' from package 'openbabel' (universe)
+ Command 'babeld' from package 'babeld' (universe)
+zsh: command not found: babel:
+zsh: command not found: presets:
+[: ']' expected
+zsh: command not found: latest,
+zsh: command not found: es2015:
+zsh: command not found: modules:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react",[?1l>[?2004l
+]2;"react",]1;"react",zsh: command not found: react,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "stage-0"[?1l>[?2004l
+]2;"stage-0"]1;"stage-0"zsh: command not found: stage-0
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "env": {[?1l>[?2004l
+]2;"env": {]1;"env":No command 'env:' found, did you mean:
+ Command 'env' from package 'coreutils' (main)
+zsh: command not found: env:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "production": {[?1l>[?2004l
+]2;"production": {]1;"production":zsh: command not found: production:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "only": [[?1l>[?2004l
+]2;"only": []1;"only":zsh: command not found: only:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka]1;..gy/pripadovka[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "app"[?1l>[?2004l
+]2;"app"]1;"app"[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "plugins": [[?1l>[?2004l
+]2;"plugins": []1;"plugins":zsh: command not found: plugins:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "transform-react-remove-prop-types",[?1l>[?2004l
+]2;"transform-react-remove-prop-types",]1;"transform-react-remove-prop-types",zsh: command not found: transform-react-remove-prop-types,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "transform-react-constant-elements",[?1l>[?2004l
+]2;"transform-react-constant-elements",]1;"transform-react-constant-elements",zsh: command not found: transform-react-constant-elements,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "transform-react-inline-elements"[?1l>[?2004l
+]2;"transform-react-inline-elements"]1;"transform-react-inline-elements"zsh: command not found: transform-react-inline-elements
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         ][?1l>[?2004l
+]2;]]1;]zsh: command not found: ]
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "test": {[?1l>[?2004l
+]2;"test": {]1;"test":No command 'test:' found, did you mean:
+ Command 'testr' from package 'python-testrepository' (universe)
+ Command 'testr' from package 'python3-testrepository' (main)
+ Command 'test' from package 'coreutils' (main)
+zsh: command not found: test:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "plugins": [[?1l>[?2004l
+]2;"plugins": []1;"plugins":zsh: command not found: plugins:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "transform-es2015-modules-commonjs",[?1l>[?2004l
+]2;"transform-es2015-modules-commonjs",]1;"transform-es2015-modules-commonjs",zsh: command not found: transform-es2015-modules-commonjs,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "dynamic-import-node"[?1l>[?2004l
+]2;"dynamic-import-node"]1;"dynamic-import-node"zsh: command not found: dynamic-import-node
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         ][?1l>[?2004l
+]2;]]1;]zsh: command not found: ]
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   "eslintConfig": {[?1l>[?2004l
+]2;"eslintConfig": {]1;"eslintConfig":zsh: command not found: eslintConfig:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "parser": "babel-eslint",[?1l>[?2004l
+]2;"parser": "babel-eslint",]1;"parser":No command 'parser:' found, did you mean:
+ Command 'parser3' from package 'parser3-cgi' (universe)
+zsh: command not found: parser:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "extends": "airbnb",[?1l>[?2004l
+]2;"extends": "airbnb",]1;"extends":zsh: command not found: extends:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "env": {[?1l>[?2004l
+]2;"env": {]1;"env":No command 'env:' found, did you mean:
+ Command 'env' from package 'coreutils' (main)
+zsh: command not found: env:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "browser": true,[?1l>[?2004l
+]2;"browser": true,]1;"browser":No command 'browser:' found, did you mean:
+ Command 'browser' from package 'libsilo-bin' (universe)
+zsh: command not found: browser:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "node": true,[?1l>[?2004l
+]2;"node": true,]1;"node":No command 'node:' found, did you mean:
+ Command 'node' from package 'nodejs-legacy' (universe)
+zsh: command not found: node:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jest": true,[?1l>[?2004l
+]2;"jest": true,]1;"jest":zsh: command not found: jest:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "es6": true[?1l>[?2004l
+]2;"es6": true]1;"es6":zsh: command not found: es6:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "plugins": [[?1l>[?2004l
+]2;"plugins": []1;"plugins":zsh: command not found: plugins:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "redux-saga",[?1l>[?2004l
+]2;"redux-saga",]1;"redux-saga",zsh: command not found: redux-saga,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react",[?1l>[?2004l
+]2;"react",]1;"react",zsh: command not found: react,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y"[?1l>[?2004l
+]2;"jsx-a11y"]1;"jsx-a11y"zsh: command not found: jsx-a11y
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "parserOptions": {[?1l>[?2004l
+]2;"parserOptions": {]1;"parserOptions":zsh: command not found: parserOptions:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "ecmaVersion": 6,[?1l>[?2004l
+]2;"ecmaVersion": 6,]1;"ecmaVersion":zsh: command not found: ecmaVersion:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "sourceType": "module",[?1l>[?2004l
+]2;"sourceType": "module",]1;"sourceType":zsh: command not found: sourceType:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "ecmaFeatures": {[?1l>[?2004l
+]2;"ecmaFeatures": {]1;"ecmaFeatures":zsh: command not found: ecmaFeatures:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "jsx": true[?1l>[?2004l
+]2;"jsx": true]1;"jsx":zsh: command not found: jsx:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "rules": {[?1l>[?2004l
+]2;"rules": {]1;"rules":zsh: command not found: rules:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "arrow-parens": [[?1l>[?2004l
+]2;"arrow-parens": []1;"arrow-parens":zsh: command not found: arrow-parens:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "error",[?1l>[?2004l
+]2;"error",]1;"error",zsh: command not found: error,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "always"[?1l>[?2004l
+]2;"always"]1;"always"zsh: command not found: always
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "arrow-body-style": [[?1l>[?2004l
+]2;"arrow-body-style": []1;"arrow-body-style":zsh: command not found: arrow-body-style:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         2,[?1l>[?2004l
+]2;2,]1;2,zsh: command not found: 2,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "as-needed"[?1l>[?2004l
+]2;"as-needed"]1;"as-needed"zsh: command not found: as-needed
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "comma-dangle": [[?1l>[?2004l
+]2;"comma-dangle": []1;"comma-dangle":zsh: command not found: comma-dangle:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         2,[?1l>[?2004l
+]2;2,]1;2,zsh: command not found: 2,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "always-multiline"[?1l>[?2004l
+]2;"always-multiline"]1;"always-multiline"zsh: command not found: always-multiline
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/imports-first": 0,[?1l>[?2004l
+]2;"import/imports-first": 0,]1;"import/imports-first":zsh: no such file or directory: import/imports-first:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/newline-after-import": 0,[?1l>[?2004l
+]2;"import/newline-after-import": 0,]1;"import/newline-after-import":zsh: no such file or directory: import/newline-after-import:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/no-dynamic-require": 0,[?1l>[?2004l
+]2;"import/no-dynamic-require": 0,]1;"import/no-dynamic-require":zsh: no such file or directory: import/no-dynamic-require:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/no-extraneous-dependencies": 0,[?1l>[?2004l
+]2;"import/no-extraneous-dependencies": 0,]1;"import/no-extraneous-dependencies":zsh: no such file or directory: import/no-extraneous-dependencies:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/no-named-as-default": 0,[?1l>[?2004l
+]2;"import/no-named-as-default": 0,]1;"import/no-named-as-default":zsh: no such file or directory: import/no-named-as-default:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/no-unresolved": 2,[?1l>[?2004l
+]2;"import/no-unresolved": 2,]1;"import/no-unresolved":zsh: no such file or directory: import/no-unresolved:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/prefer-default-export": 0,[?1l>[?2004l
+]2;"import/prefer-default-export": 0,]1;"import/prefer-default-export":zsh: no such file or directory: import/prefer-default-export:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "indent": [[?1l>[?2004l
+]2;"indent": []1;"indent":No command 'indent:' found, did you mean:
+ Command 'indent' from package 'indent' (main)
+zsh: command not found: indent:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         2,[?1l>[?2004l
+]2;2,]1;2,zsh: command not found: 2,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         2,[?1l>[?2004l
+]2;2,]1;2,zsh: command not found: 2,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         {[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h           "SwitchCase": 1[?1l>[?2004l
+[0m[27m[24m[Jcursh> [K[?1h=[?2004h         }[?1l>[?2004l
+]2;{ "SwitchCase": 1; }]1;{zsh: command not found: SwitchCase:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/aria-props": 2,[?1l>[?2004l
+]2;"jsx-a11y/aria-props": 2,]1;"jsx-a11y/aria-props":zsh: no such file or directory: jsx-a11y/aria-props:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/heading-has-content": 0,[?1l>[?2004l
+]2;"jsx-a11y/heading-has-content": 0,]1;"jsx-a11y/heading-has-content":zsh: no such file or directory: jsx-a11y/heading-has-content:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/href-no-hash": 2,[?1l>[?2004l
+]2;"jsx-a11y/href-no-hash": 2,]1;"jsx-a11y/href-no-hash":zsh: no such file or directory: jsx-a11y/href-no-hash:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/label-has-for": 2,[?1l>[?2004l
+]2;"jsx-a11y/label-has-for": 2,]1;"jsx-a11y/label-has-for":zsh: no such file or directory: jsx-a11y/label-has-for:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/mouse-events-have-key-events": 2,[?1l>[?2004l
+]2;"jsx-a11y/mouse-events-have-key-events": 2,]1;"jsx-a11y/mouse-events-have-key-events":zsh: no such file or directory: jsx-a11y/mouse-events-have-key-events:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/role-has-required-aria-props": 2,[?1l>[?2004l
+]2;"jsx-a11y/role-has-required-aria-props": 2,]1;"jsx-a11y/role-has-required-aria-props":zsh: no such file or directory: jsx-a11y/role-has-required-aria-props:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "jsx-a11y/role-supports-aria-props": 2,[?1l>[?2004l
+]2;"jsx-a11y/role-supports-aria-props": 2,]1;"jsx-a11y/role-supports-aria-props":zsh: no such file or directory: jsx-a11y/role-supports-aria-props:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "max-len": 0,[?1l>[?2004l
+]2;"max-len": 0,]1;"max-len":zsh: command not found: max-len:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "newline-per-chained-call": 0,[?1l>[?2004l
+]2;"newline-per-chained-call": 0,]1;"newline-per-chained-call":zsh: command not found: newline-per-chained-call:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "no-confusing-arrow": 0,[?1l>[?2004l
+]2;"no-confusing-arrow": 0,]1;"no-confusing-arrow":zsh: command not found: no-confusing-arrow:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "no-console": 1,[?1l>[?2004l
+]2;"no-console": 1,]1;"no-console":zsh: command not found: no-console:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "no-use-before-define": 0,[?1l>[?2004l
+]2;"no-use-before-define": 0,]1;"no-use-before-define":zsh: command not found: no-use-before-define:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "prefer-template": 2,[?1l>[?2004l
+]2;"prefer-template": 2,]1;"prefer-template":zsh: command not found: prefer-template:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "class-methods-use-this": 0,[?1l>[?2004l
+]2;"class-methods-use-this": 0,]1;"class-methods-use-this":zsh: command not found: class-methods-use-this:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/forbid-prop-types": 0,[?1l>[?2004l
+]2;"react/forbid-prop-types": 0,]1;"react/forbid-prop-types":zsh: no such file or directory: react/forbid-prop-types:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/jsx-first-prop-new-line": [[?1l>[?2004l
+]2;"react/jsx-first-prop-new-line": []1;"react/jsx-first-prop-new-line":zsh: no such file or directory: react/jsx-first-prop-new-line:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         2,[?1l>[?2004l
+]2;2,]1;2,zsh: command not found: 2,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "multiline"[?1l>[?2004l
+]2;"multiline"]1;"multiline"zsh: command not found: multiline
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/jsx-filename-extension": 0,[?1l>[?2004l
+]2;"react/jsx-filename-extension": 0,]1;"react/jsx-filename-extension":zsh: no such file or directory: react/jsx-filename-extension:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/jsx-no-target-blank": 0,[?1l>[?2004l
+]2;"react/jsx-no-target-blank": 0,]1;"react/jsx-no-target-blank":zsh: no such file or directory: react/jsx-no-target-blank:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/require-extension": 0,[?1l>[?2004l
+]2;"react/require-extension": 0,]1;"react/require-extension":zsh: no such file or directory: react/require-extension:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "react/self-closing-comp": 0,[?1l>[?2004l
+]2;"react/self-closing-comp": 0,]1;"react/self-closing-comp":zsh: no such file or directory: react/self-closing-comp:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "redux-saga/no-yield-in-race": 2,[?1l>[?2004l
+]2;"redux-saga/no-yield-in-race": 2,]1;"redux-saga/no-yield-in-race":zsh: no such file or directory: redux-saga/no-yield-in-race:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "redux-saga/yield-effects": 2,[?1l>[?2004l
+]2;"redux-saga/yield-effects": 2,]1;"redux-saga/yield-effects":zsh: no such file or directory: redux-saga/yield-effects:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "require-yield": 0,[?1l>[?2004l
+]2;"require-yield": 0,]1;"require-yield":zsh: command not found: require-yield:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/no-webpack-loader-syntax": 0[?1l>[?2004l
+]2;"import/no-webpack-loader-syntax": 0]1;"import/no-webpack-loader-syntax":zsh: no such file or directory: import/no-webpack-loader-syntax:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "settings": {[?1l>[?2004l
+]2;"settings": {]1;"settings":zsh: command not found: settings:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "import/resolver": {[?1l>[?2004l
+]2;"import/resolver": {]1;"import/resolver":zsh: no such file or directory: import/resolver:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "webpack": {[?1l>[?2004l
+]2;"webpack": {]1;"webpack":zsh: command not found: webpack:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h           "config": "./internals/webpack/webpack.prod.babel.js"[?1l>[?2004l
+]2;"config": "./internals/webpack/webpack.prod.babel.js"]1;"config":zsh: command not found: config:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   "dllPlugin": {[?1l>[?2004l
+]2;"dllPlugin": {]1;"dllPlugin":zsh: command not found: dllPlugin:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "path": "node_modules/react-boilerplate-dlls",[?1l>[?2004l
+]2;"path": "node_modules/react-boilerplate-dlls",]1;"path":No command 'path:' found, did you mean:
+ Command 'path6' from package 'ipv6toolkit' (universe)
+zsh: command not found: path:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "exclude": [[?1l>[?2004l
+]2;"exclude": []1;"exclude":zsh: command not found: exclude:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "chalk",[?1l>[?2004l
+]2;"chalk",]1;"chalk",zsh: command not found: chalk,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "compression",[?1l>[?2004l
+]2;"compression",]1;"compression",zsh: command not found: compression,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "cross-env",[?1l>[?2004l
+]2;"cross-env",]1;"cross-env",zsh: command not found: cross-env,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "express",[?1l>[?2004l
+]2;"express",]1;"express",No command 'express,' found, did you mean:
+ Command 'express' from package 'node-express-generator' (universe)
+zsh: command not found: express,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "ip",[?1l>[?2004l
+]2;"ip",]1;"ip",No command 'ip,' found, did you mean:
+ Command 'ipa' from package 'freeipa-admintools' (universe)
+ Command 'ip' from package 'iproute2' (main)
+ Command 'ips' from package 'ips' (universe)
+ Command 'ipe' from package 'ipe' (universe)
+zsh: command not found: ip,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "minimist",[?1l>[?2004l
+]2;"minimist",]1;"minimist",zsh: command not found: minimist,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "sanitize.css"[?1l>[?2004l
+]2;"sanitize.css"]1;"sanitize.css"zsh: command not found: sanitize.css
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "include": [[?1l>[?2004l
+]2;"include": []1;"include":zsh: command not found: include:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "core-js",[?1l>[?2004l
+]2;"core-js",]1;"core-js",zsh: command not found: core-js,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "lodash",[?1l>[?2004l
+]2;"lodash",]1;"lodash",zsh: command not found: lodash,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "eventsource-polyfill"[?1l>[?2004l
+]2;"eventsource-polyfill"]1;"eventsource-polyfill"zsh: command not found: eventsource-polyfill
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ][?1l>[?2004l
+]2;]]1;]zsh: command not found: ]
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   "jest": {[?1l>[?2004l
+]2;"jest": {]1;"jest":zsh: command not found: jest:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "collectCoverageFrom": [[?1l>[?2004l
+]2;"collectCoverageFrom": []1;"collectCoverageFrom":zsh: command not found: collectCoverageFrom:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "app/**/*.{js,jsx}",[?1l>[?2004l
+]2;"app/**/*.{js,jsx}",]1;"app/**/*.{js,jsx}",zsh: no such file or directory: app/**/*.{js,jsx},
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "!app/**/*.test.{js,jsx}",[?1l>[?2004l
+zsh: event not found: app/
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "!app/*/RbGenerated*/*.{js,jsx}",[?1l>[?2004l
+zsh: event not found: app/
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "!app/app.js",[?1l>[?2004l
+zsh: event not found: app/app.js
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "!app/routes.js"[?1l>[?2004l
+zsh: event not found: app/routes.js
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "coverageThreshold": {[?1l>[?2004l
+]2;"coverageThreshold": {]1;"coverageThreshold":zsh: command not found: coverageThreshold:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "global": {[?1l>[?2004l
+]2;"global": {]1;"global":No command 'global:' found, did you mean:
+ Command 'global' from package 'global' (universe)
+zsh: command not found: global:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "statements": 98,[?1l>[?2004l
+]2;"statements": 98,]1;"statements":zsh: command not found: statements:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "branches": 91,[?1l>[?2004l
+]2;"branches": 91,]1;"branches":zsh: command not found: branches:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "functions": 98,[?1l>[?2004l
+]2;"functions": 98,]1;"functions":zsh: command not found: functions:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h         "lines": 98[?1l>[?2004l
+]2;"lines": 98]1;"lines":zsh: command not found: lines:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       }[?1l>[?2004l
+zsh: parse error near `}'
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "moduleDirectories": [[?1l>[?2004l
+]2;"moduleDirectories": []1;"moduleDirectories":zsh: command not found: moduleDirectories:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "node_modules",[?1l>[?2004l
+]2;"node_modules",]1;"node_modules",zsh: command not found: node_modules,
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       "app"[?1l>[?2004l
+]2;"app"]1;"app"No command 'app' found, but there are 16 similar ones
+zsh: command not found: app
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     ],[?1l>[?2004l
+]2;],]1;],zsh: command not found: ],
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "moduleNameMapper": {[?1l>[?2004l
+]2;"moduleNameMapper": {]1;"moduleNameMapper":zsh: command not found: moduleNameMapper:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssMod [Kuule.js",[?1l>[?2004l
+]2;".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssModule.js",]1;".*\\.(css|less|styl|scss|sass)$":zsh: command not found: .*\.(css|less|styl|scss|sass)$:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h       ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav [K||mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js"[?1l>[?2004l
+]2; "<rootDir>/internals/mocks/image.js"]1;".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":zsh: command not found: .*\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bund [Kller.js",[?1l>[?2004l
+]2;"setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js"]1;"setupTestFrameworkScriptFile":zsh: command not found: setupTestFrameworkScriptFile:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "testRegex": "tests/.*\\.test\\.js$"[?1l>[?2004l
+]2;"testRegex": "tests/.*\\.test\\.js$"]1;"testRegex":zsh: command not found: testRegex:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   "dependencies": {[?1l>[?2004l
+]2;"dependencies": {]1;"dependencies":zsh: command not found: dependencies:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-polyfill": "6.20.0",[?1l>[?2004l
+]2;"babel-polyfill": "6.20.0",]1;"babel-polyfill":zsh: command not found: babel-polyfill:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "chalk": "1.1.3",[?1l>[?2004l
+]2;"chalk": "1.1.3",]1;"chalk":zsh: command not found: chalk:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "compression": "1.6.2",[?1l>[?2004l
+]2;"compression": "1.6.2",]1;"compression":zsh: command not found: compression:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "cross-env": "3.1.3",[?1l>[?2004l
+]2;"cross-env": "3.1.3",]1;"cross-env":zsh: command not found: cross-env:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "express": "4.14.0",[?1l>[?2004l
+]2;"express": "4.14.0",]1;"express":No command 'express:' found, did you mean:
+ Command 'express' from package 'node-express-generator' (universe)
+zsh: command not found: express:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "fontfaceobserver": "2.0.7",[?1l>[?2004l
+]2;"fontfaceobserver": "2.0.7",]1;"fontfaceobserver":zsh: command not found: fontfaceobserver:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "immutable": "3.8.1",[?1l>[?2004l
+]2;"immutable": "3.8.1",]1;"immutable":zsh: command not found: immutable:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "intl": "1.2.5",[?1l>[?2004l
+]2;"intl": "1.2.5",]1;"intl":zsh: command not found: intl:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "invariant": "2.2.2",[?1l>[?2004l
+]2;"invariant": "2.2.2",]1;"invariant":zsh: command not found: invariant:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "ip": "1.1.4",[?1l>[?2004l
+]2;"ip": "1.1.4",]1;"ip":No command 'ip:' found, did you mean:
+ Command 'ips' from package 'ips' (universe)
+ Command 'ipe' from package 'ipe' (universe)
+ Command 'ip' from package 'iproute2' (main)
+ Command 'ipa' from package 'freeipa-admintools' (universe)
+zsh: command not found: ip:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "lodash": "4.17.2",[?1l>[?2004l
+]2;"lodash": "4.17.2",]1;"lodash":zsh: command not found: lodash:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "minimist": "1.2.0",[?1l>[?2004l
+]2;"minimist": "1.2.0",]1;"minimist":zsh: command not found: minimist:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react": "15.4.1",[?1l>[?2004l
+]2;"react": "15.4.1",]1;"react":zsh: command not found: react:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-dom": "15.4.1",[?1l>[?2004l
+]2;"react-dom": "15.4.1",]1;"react-dom":zsh: command not found: react-dom:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-helmet": "3.2.2",[?1l>[?2004l
+]2;"react-helmet": "3.2.2",]1;"react-helmet":zsh: command not found: react-helmet:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-intl": "2.1.5",[?1l>[?2004l
+]2;"react-intl": "2.1.5",]1;"react-intl":zsh: command not found: react-intl:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-redux": "4.4.6",[?1l>[?2004l
+]2;"react-redux": "4.4.6",]1;"react-redux":zsh: command not found: react-redux:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-router": "3.0.0",[?1l>[?2004l
+]2;"react-router": "3.0.0",]1;"react-router":zsh: command not found: react-router:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-router-redux": "4.0.6",[?1l>[?2004l
+]2;"react-router-redux": "4.0.6",]1;"react-router-redux":zsh: command not found: react-router-redux:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "react-router-scroll": "0.4.1",[?1l>[?2004l
+]2;"react-router-scroll": "0.4.1",]1;"react-router-scroll":zsh: command not found: react-router-scroll:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "redux": "3.6.0",[?1l>[?2004l
+]2;"redux": "3.6.0",]1;"redux":zsh: command not found: redux:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "redux-immutable": "3.0.8",[?1l>[?2004l
+]2;"redux-immutable": "3.0.8",]1;"redux-immutable":zsh: command not found: redux-immutable:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "redux-saga": "0.14.0",[?1l>[?2004l
+]2;"redux-saga": "0.14.0",]1;"redux-saga":zsh: command not found: redux-saga:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "reselect": "2.5.4",[?1l>[?2004l
+]2;"reselect": "2.5.4",]1;"reselect":zsh: command not found: reselect:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "sanitize.css": "4.1.0",[?1l>[?2004l
+]2;"sanitize.css": "4.1.0",]1;"sanitize.css":zsh: command not found: sanitize.css:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "styled-components": "1.1.2",[?1l>[?2004l
+]2;"styled-components": "1.1.2",]1;"styled-components":zsh: command not found: styled-components:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "warning": "3.0.0",[?1l>[?2004l
+]2;"warning": "3.0.0",]1;"warning":zsh: command not found: warning:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "whatwg-fetch": "2.0.1"[?1l>[?2004l
+]2;"whatwg-fetch": "2.0.1"]1;"whatwg-fetch":zsh: command not found: whatwg-fetch:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   },[?1l>[?2004l
+]2;},]1;},zsh: command not found: },
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h   "devDependencies": {[?1l>[?2004l
+]2;"devDependencies": {]1;"devDependencies":zsh: command not found: devDependencies:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-cli": "6.18.0",[?1l>[?2004l
+]2;"babel-cli": "6.18.0",]1;"babel-cli":zsh: command not found: babel-cli:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-core": "6.21.0",[?1l>[?2004l
+]2;"babel-core": "6.21.0",]1;"babel-core":zsh: command not found: babel-core:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-eslint": "7.1.1",[?1l>[?2004l
+]2;"babel-eslint": "7.1.1",]1;"babel-eslint":zsh: command not found: babel-eslint:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-loader": "6.2.10",[?1l>[?2004l
+]2;"babel-loader": "6.2.10",]1;"babel-loader":zsh: command not found: babel-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-dynamic-import-node": "1.0.0",[?1l>[?2004l
+]2;"babel-plugin-dynamic-import-node": "1.0.0",]1;"babel-plugin-dynamic-import-node":zsh: command not found: babel-plugin-dynamic-import-node:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-react-intl": "2.2.0",[?1l>[?2004l
+]2;"babel-plugin-react-intl": "2.2.0",]1;"babel-plugin-react-intl":zsh: command not found: babel-plugin-react-intl:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-react-transform": "2.0.2",[?1l>[?2004l
+]2;"babel-plugin-react-transform": "2.0.2",]1;"babel-plugin-react-transform":zsh: command not found: babel-plugin-react-transform:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-transform-es2015-modules-commonjs": "6.18.0",[?1l>[?2004l
+]2;"babel-plugin-transform-es2015-modules-commonjs": "6.18.0",]1;"babel-plugin-transform-es2015-modules-commonjs":zsh: command not found: babel-plugin-transform-es2015-modules-commonjs:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-transform-react-constant-elements": "6.9.1",[?1l>[?2004l
+]2;"babel-plugin-transform-react-constant-elements": "6.9.1",]1;"babel-plugin-transform-react-constant-elements":zsh: command not found: babel-plugin-transform-react-constant-elements:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-transform-react-inline-elements": "6.8.0",[?1l>[?2004l
+]2;"babel-plugin-transform-react-inline-elements": "6.8.0",]1;"babel-plugin-transform-react-inline-elements":zsh: command not found: babel-plugin-transform-react-inline-elements:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-plugin-transform-react-remove-prop-types": "0.2.11",[?1l>[?2004l
+]2;"babel-plugin-transform-react-remove-prop-types": "0.2.11",]1;"babel-plugin-transform-react-remove-prop-types":zsh: command not found: babel-plugin-transform-react-remove-prop-types:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-preset-latest": "6.16.0",[?1l>[?2004l
+]2;"babel-preset-latest": "6.16.0",]1;"babel-preset-latest":zsh: command not found: babel-preset-latest:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-preset-react": "6.16.0",[?1l>[?2004l
+]2;"babel-preset-react": "6.16.0",]1;"babel-preset-react":zsh: command not found: babel-preset-react:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-preset-react-hmre": "1.1.1",[?1l>[?2004l
+]2;"babel-preset-react-hmre": "1.1.1",]1;"babel-preset-react-hmre":zsh: command not found: babel-preset-react-hmre:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "babel-preset-stage-0": "6.16.0",[?1l>[?2004l
+]2;"babel-preset-stage-0": "6.16.0",]1;"babel-preset-stage-0":zsh: command not found: babel-preset-stage-0:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "cheerio": "0.22.0",[?1l>[?2004l
+]2;"cheerio": "0.22.0",]1;"cheerio":zsh: command not found: cheerio:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "circular-dependency-plugin": "2.0.0",[?1l>[?2004l
+]2;"circular-dependency-plugin": "2.0.0",]1;"circular-dependency-plugin":zsh: command not found: circular-dependency-plugin:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "coveralls": "2.11.15",[?1l>[?2004l
+]2;"coveralls": "2.11.15",]1;"coveralls":No command 'coveralls:' found, did you mean:
+ Command 'coveralls' from package 'ruby-coveralls' (universe)
+zsh: command not found: coveralls:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "css-loader": "0.26.1",[?1l>[?2004l
+]2;"css-loader": "0.26.1",]1;"css-loader":zsh: command not found: css-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "enzyme": "2.6.0",[?1l>[?2004l
+]2;"enzyme": "2.6.0",]1;"enzyme":zsh: command not found: enzyme:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint": "3.11.1",[?1l>[?2004l
+]2;"eslint": "3.11.1",]1;"eslint":zsh: command not found: eslint:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-config-airbnb": "13.0.0",[?1l>[?2004l
+]2;"eslint-config-airbnb": "13.0.0",]1;"eslint-config-airbnb":zsh: command not found: eslint-config-airbnb:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-config-airbnb-base": "10.0.1",[?1l>[?2004l
+]2;"eslint-config-airbnb-base": "10.0.1",]1;"eslint-config-airbnb-base":zsh: command not found: eslint-config-airbnb-base:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-import-resolver-webpack": "0.8.0",[?1l>[?2004l
+]2;"eslint-import-resolver-webpack": "0.8.0",]1;"eslint-import-resolver-webpack":zsh: command not found: eslint-import-resolver-webpack:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-plugin-import": "2.2.0",[?1l>[?2004l
+]2;"eslint-plugin-import": "2.2.0",]1;"eslint-plugin-import":zsh: command not found: eslint-plugin-import:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-plugin-jsx-a11y": "2.2.3",[?1l>[?2004l
+]2;"eslint-plugin-jsx-a11y": "2.2.3",]1;"eslint-plugin-jsx-a11y":zsh: command not found: eslint-plugin-jsx-a11y:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-plugin-react": "6.7.1",[?1l>[?2004l
+]2;"eslint-plugin-react": "6.7.1",]1;"eslint-plugin-react":zsh: command not found: eslint-plugin-react:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eslint-plugin-redux-saga": "0.1.5",[?1l>[?2004l
+]2;"eslint-plugin-redux-saga": "0.1.5",]1;"eslint-plugin-redux-saga":zsh: command not found: eslint-plugin-redux-saga:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "eventsource-polyfill": "0.9.6",[?1l>[?2004l
+]2;"eventsource-polyfill": "0.9.6",]1;"eventsource-polyfill":zsh: command not found: eventsource-polyfill:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "exports-loader": "0.6.3",[?1l>[?2004l
+]2;"exports-loader": "0.6.3",]1;"exports-loader":zsh: command not found: exports-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "file-loader": "0.9.0",[?1l>[?2004l
+]2;"file-loader": "0.9.0",]1;"file-loader":zsh: command not found: file-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "html-loader": "0.4.4",[?1l>[?2004l
+]2;"html-loader": "0.4.4",]1;"html-loader":zsh: command not found: html-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "html-webpack-plugin": "2.24.1",[?1l>[?2004l
+]2;"html-webpack-plugin": "2.24.1",]1;"html-webpack-plugin":zsh: command not found: html-webpack-plugin:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "image-webpack-loader": "2.0.0",[?1l>[?2004l
+]2;"image-webpack-loader": "2.0.0",]1;"image-webpack-loader":zsh: command not found: image-webpack-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "imports-loader": "0.6.5",[?1l>[?2004l
+]2;"imports-loader": "0.6.5",]1;"imports-loader":zsh: command not found: imports-loader:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/purple_technology/pripadovka/app[00m  [36mgit:(master*)[00m $ [K[?1h=[?2004h     "jest-cli": "18.0.0",[?1l>[?2004l
+]2;"jest-cli": "18.0.0",]1;"jest-cli":zsh: command not found: jest-cli:
+[1m[7m%[27m[1m[0m                                                                                ]2;pyrek@pyrekNTB: ~/projects/purple_technology/pripadovka/app]1;..ripadovka/app[0m[27m[24m[J[36mpyrek[00m@[33mpyrekNTB:[32m/home/pyrek/projects/pu
