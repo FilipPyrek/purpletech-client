@@ -1,3 +1,24 @@
+# purpletech-client
+
+#### This project is work in progress
+
+Client for this API - [https://github.com/FilipPyrek/purpletech-client](https://github.com/FilipPyrek/purpletech-client)
+
+![screen](https://cloud.githubusercontent.com/assets/6282843/26675204/4f13a8f2-46c3-11e7-8110-0f05472ecc1e.png)
+
+## How to start
+
+- Devlopment - `yarn start`
+- Production - `yarn build && yarn start:prod`
+
+## How it (currently) works
+Run saga on background -> wait until form is submitted -> make a request to the API -> display the JSON -> repeat
+
+<br><br><br><br><br><br><br>
+------------------------------------------------------
+<br><br><br><br><br><br><br>
+# This project is derived from 'react-boilerplate'
+
 <img src="https://raw.githubusercontent.com/react-boilerplate/react-boilerplate-brand/master/assets/banner-metal-optimized.jpg" alt="react boilerplate banner" align="center" />
 
 <br />
