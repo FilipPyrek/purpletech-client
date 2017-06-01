@@ -6,6 +6,15 @@ Client for this API - [https://github.com/FilipPyrek/purpletech-client](https://
 
 ![screen](https://cloud.githubusercontent.com/assets/6282843/26675204/4f13a8f2-46c3-11e7-8110-0f05472ecc1e.png)
 
+## TODO
+
+- [x] Deploy initial stack
+- [x] Clear initial stack
+- [x] Create saga for fetching data from API
+- [x] Create basic UI for interacting with API
+- [ ] Improve UI&UX
+- [ ] Add tests
+
 ## How to start
 
 - Devlopment - `yarn start`
